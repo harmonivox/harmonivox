@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>HarmoniVox Painting Voices to Match the Avatar’s Soul | HarmoniVox - Painting Voices to Match the Avatar’s Soul</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="HarmoniVox Painting Voices to Match the Avatar’s Soul" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A method that jointly models semantic consistency in avatar animation, named HarmoniVox, specifically on crafting prosodic speech consistent with the avatar’s essence from given visual image." />
+<meta property="og:description" content="A method that jointly models semantic consistency in avatar animation, named HarmoniVox, specifically on crafting prosodic speech consistent with the avatar’s essence from given visual image." />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="HarmoniVox - Painting Voices to Match the Avatar’s Soul" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HarmoniVox Painting Voices to Match the Avatar’s Soul" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"A method that jointly models semantic consistency in avatar animation, named HarmoniVox, specifically on crafting prosodic speech consistent with the avatar’s essence from given visual image.","headline":"HarmoniVox Painting Voices to Match the Avatar’s Soul","name":"HarmoniVox - Painting Voices to Match the Avatar’s Soul","url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="./assets/css/style.css?v=">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name"><span style="font-family: 'Trade Winds'">HarmoniVox </span><br> <i>Painting Voices to Match the Avatar's Soul</i></h1>
+      <h2 class="project-tagline">A method that jointly models semantic consistency in avatar animation, named HarmoniVox, specifically on crafting prosodic speech consistent with the avatar’s essence from given visual image.</h2>
+      
+        <a href="https://github.com/harmonivox/harmonivox" class="btn">View on GitHub</a>
+      
+      
+    </header>
+
+    <div class="sidebar-container">
+        <div class="sidebar">
+          <nav>
+            Contents
+            <ul id="sidebar-nav">
+              <!-- 添加更多目录项 -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    <main id="content" class="main-content" role="main">
+      <p>Please open the demo webpage in Chrome for an enhanced experience. Headphones are recommended for better audio quality.</p>
+
+<h1 id="haravaspeech-dataset"><a href="#HarAvaSpeech-dataset"></a><span style="font-variant: small-caps;">HarAvaSpeech</span> Dataset</h1>
+
+<h2 id="-dataset-visualization"><a href="#dataset-visulization"></a> Dataset Visualization</h2>
+<p>Here we present the visualization of our dataset <span style="font-variant: small-caps;">HarAvaSpeech</span> on the distribution of: body posture (a.k.a. Fig.5(a)), scene (a.k.a. Fig.5(b)), langauge, gender, age, and emotion.</p>
+
+<p><img src="./assets/dataset_vis/dataset-visualization.png" /></p>
+
+<p>The following are the random samples from our dataset <span style="font-variant: small-caps;">HarAvaSpeech</span>.</p>
+
+<div class="table-container">
+    <table>
+        
+        <tr>
+            
+            
+            <td>
+                <img src="./assets/dataset/1.jpg" />
+                <audio controls=""><source src="./assets/dataset/1.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/2.jpg" />
+                <audio controls=""><source src="./assets/dataset/2.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/3.jpg" />
+                <audio controls=""><source src="./assets/dataset/3.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/4.jpg" />
+                <audio controls=""><source src="./assets/dataset/4.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/5.jpg" />
+                <audio controls=""><source src="./assets/dataset/5.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+        </tr>
+        
+        <tr>
+            
+            
+            <td>
+                <img src="./assets/dataset/6.jpg" />
+                <audio controls=""><source src="./assets/dataset/6.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/7.jpg" />
+                <audio controls=""><source src="./assets/dataset/7.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/8.jpg" />
+                <audio controls=""><source src="./assets/dataset/8.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/9.jpg" />
+                <audio controls=""><source src="./assets/dataset/9.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/10.jpg" />
+                <audio controls=""><source src="./assets/dataset/10.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+        </tr>
+        
+        <tr>
+            
+            
+            <td>
+                <img src="./assets/dataset/11.jpg" />
+                <audio controls=""><source src="./assets/dataset/11.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/12.jpg" />
+                <audio controls=""><source src="./assets/dataset/12.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/13.jpg" />
+                <audio controls=""><source src="./assets/dataset/13.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/14.jpg" />
+                <audio controls=""><source src="./assets/dataset/14.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/15.jpg" />
+                <audio controls=""><source src="./assets/dataset/15.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+        </tr>
+        
+        <tr>
+            
+            
+            <td>
+                <img src="./assets/dataset/16.jpg" />
+                <audio controls=""><source src="./assets/dataset/16.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/17.jpg" />
+                <audio controls=""><source src="./assets/dataset/17.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/18.jpg" />
+                <audio controls=""><source src="./assets/dataset/18.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/19.jpg" />
+                <audio controls=""><source src="./assets/dataset/19.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+            
+            <td>
+                <img src="./assets/dataset/20.jpg" />
+                <audio controls=""><source src="./assets/dataset/20.wav" type="audio/mpeg" /></audio>
+            </td>
+            
+        </tr>
+        
+    </table>
+</div>
+
+<h2 id="-effective-of-momentary-visual-contexts"><a href="#comparative-experiments"></a> Effective of Momentary Visual Contexts</h2>
+
+<p>To verify the effectiveness of non-facial regions, we conduct comparative experiments on different regions of the image: face-only, non-face, original.
+All three of them are conducted with HarmoniVox framework but without loss weight annealing.</p>
+
+<table>
+  <tr class="tr-bottom">
+    <th>#</th>
+    <th>Non-Face</th>
+    <th>Face-Only</th>
+    <th>Original</th>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">1</td>
+    <td colspan="3">The cubs go sixty and thirty four from that point forward ,</td>
+  </tr>
+  <tr class="tr-bottom">
+    <td>
+      <img src="./assets/comparative/nonface_10.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_10_nonface.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/face_10.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_10_face.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/gt_audio_10.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_10_orig.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">2</td>
+    <td colspan="3">I mean you cannot , in the same moment of thought ,</td>
+  </tr>
+  <tr class="tr-bottom">
+    <td>
+      <img src="./assets/comparative/nonface_45.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_45_nonface.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/face_45.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_45_face.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/gt_audio_45.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_45_orig.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">3</td>
+    <td colspan="3">二奶奶在哭泪珠打她眼角里簌簌往下落<span style="color: lightgray;"><small>*(trans: The second lady was crying, and tears fell from the corners of her eyes.)*</small></span></td>
+  </tr>
+  <tr class="tr-bottom">
+    <td>
+      <img src="./assets/comparative/nonface_186.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_186_nonface.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/face_186.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_186_face.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/gt_audio_186.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_186_orig.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">4</td>
+    <td colspan="3">Amazing , amazing poems .</td>
+  </tr>
+  <tr class="tr-bottom">
+    <td>
+      <img src="./assets/comparative/nonface_285.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_285_nonface.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/face_285.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_285_face.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/comparative/gt_audio_285.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/comparative/gen_audio_285_orig.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<h1 id="harmonivox-framework"><a href="#HarmoniVox"></a><span style="font-variant: small-caps;">HarmoniVox</span> Framework</h1>
+
+<p>In this section we provide samples of intricated modeling of the HarmoniVox framework.
+First we present the model’s capabilities of utilizing <a href="#out-of-domain">out-of-domain</a> portraits and emojis to refine the style of speech.
+Then we demonstrate the model from various aspects such as <a href="#gender">gender</a>, <a href="#hues">hues</a>, and <a href="#emotion">emotion</a>.
+Finally, we present the results of <a href="#ablation-study">ablation study</a>.</p>
+
+<h2 id="generaliability-case-study"><a href="#case-study"></a>Generaliability Case Study</h2>
+
+<h3 id="out-of-domain-portraits"><a href="#out-of-domain"></a>Out-of-Domain Portraits</h3>
+
+<p>In this section, we present the model’s capabilities of synthesizing speech refined by out-of-domain portrait.</p>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>condition 1</th>
+    <th>condition 2</th>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">1</td>
+    <td colspan="3">I just got a call from the hospital about the test results.</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/RealsForDemo/I just got a call from the hospital about the test results.v1.png" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/I just got a call from the hospital about the test results.v1.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/RealsForDemo/I just got a call from the hospital about the test results.v2.png" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/I just got a call from the hospital about the test results.v2.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">2</td>
+    <td colspan="3">Listen, I never expected it to turn out this way.</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/RealsForDemo/Listen, I never expected it to turn out this way.v1.png" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/Listen, I never expected it to turn out this way.v1.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/RealsForDemo/Listen, I never expected it to turn out this way.v2.png" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/Listen, I never expected it to turn out this way.v2.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">3</td>
+    <td colspan="3">No matter the obstacles, we will always find a way to overcome them and reach our goals.</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/RealsForDemo/No matter the obstacles, we will always find a way to overcome them and reach our goals.v1.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/No matter the obstacles, we will always find a way to overcome them and reach our goals.v1.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/RealsForDemo/No matter the obstacles, we will always find a way to overcome them and reach our goals.v2.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/No matter the obstacles, we will always find a way to overcome them and reach our goals.v2.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">4</td>
+    <td colspan="3">This is exactly what I was talking about.</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/RealsForDemo/This is exactly what I was talking about.-v1.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/This is exactly what I was talking about.v1.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/RealsForDemo/This is exactly what I was talking about.-v2.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/This is exactly what I was talking about.v2.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">5</td>
+    <td colspan="3">这些日子做了多少违背我良心的事<span style="color: lightgray;"><small>*(trans: These days, I've done so many things that go against my conscience.)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/RealsForDemo/这些日子做了多少违背我良心的事.v1.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/这些日子做了多少违背我良心的事.v1.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/RealsForDemo/这些日子做了多少违背我良心的事.v2.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/RealsForDemo/这些日子做了多少违背我良心的事.v2.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<h3 id="gender"><a href="#case-gender"></a>Gender</h3>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Conditional Image A</th>
+    <th>Conditional Image B</th>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">1</td>
+    <td colspan="2">Hello, welcome to Mickey Mouse Clubhouse, this is super cool!</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/gender/3_lecture_male_en.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/3_lecture_male_en.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/gender/3_lecture_female_en.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/3_lecture_female_en.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">2</td>
+    <td colspan="2">新思想引领新征程,我国综合立体交通网加速形成<span style="color: lightgray;"><small>*(trans: New ideas lead a new journey, and my country’s comprehensive three-dimensional transportation network accelerates the formation of)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/gender/1_news_male.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/1_news_male.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/gender/1_news_female.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/1_news_female.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">3</td>
+    <td colspan="2">所以你看，张三构不构成犯罪，是由什么决定的<span style="color: lightgray;"><small>*(trans: So you see, what determines that Zhang Sangou does not constitute a crime?)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/gender/2_lecture_male.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/2_lecture_male.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/gender/2_lecture_female.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/2_lecture_female.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">4</td>
+    <td colspan="2">Hahaha, are you kidding me?</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/gender/4_emoji_boy.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/4_emoji_boy.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/gender/4_emoji_girl.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/gender/4_emoji_girl.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<h3 id="hues"><a href="#case-hues"></a>Hues</h3>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Conditional Image A</th>
+    <th>Conditional Image B</th>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">1</td>
+    <td colspan="2">I would like to say, that your journey has come to an end.</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/hues/darkroom_warm.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/hues/darkroom_warm.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/hues/darkroom_weird2.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/hues/darkroom_weird2.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">2</td>
+    <td colspan="2">你可真是个小坏蛋<span style="color: lightgray;"><small>*(trans: You are such a little rascal)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/hues/3_summer.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/hues/3_summer.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/hues/3_fall.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/hues/3_fall.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<h3 id="emotion"><a href="#case-emotion"></a>Emotion</h3>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Conditional Image A</th>
+    <th>Conditional Image B</th>
+    <th>Conditional Image C</th>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">1</td>
+    <td colspan="3">你太让我失望了<span style="color: lightgray;"><small>*(trans: You have let me down too much)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/emotion/1_angry.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/1_angry.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/1_loudly-crying-face.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/1_loudly-crying-face.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/1_fear_screaming.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/1_fear_screaming.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">2</td>
+    <td colspan="3">我的天哪你别靠近我<span style="color: lightgray;"><small>*(trans: Oh my god, don't come near me.)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/emotion/2_scared_cat.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/2_scared_cat.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/2_cat_smile.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/2_cat_smile.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/2_sad_cat.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/2_sad_cat.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Conditional Image A</th>
+    <th>Conditional Image B</th>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">3</td>
+    <td colspan="2">他们还厚颜无耻的说出这样的话，恶心<span style="color: lightgray;"><small>*(trans: They have the audacity to say such things, it's disgusting.)*</small></span></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/emotion/3_anger.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/3_anger.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/3_down.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/3_down.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">4</td>
+    <td colspan="2">We were going to take the shortcut onto brightside and as we were turning</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/emotion/4_joy.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/4_joy.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/4_neutral.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/4_neutral.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">5</td>
+    <td colspan="2">My best friend and my sister! I can not believe that!</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/emotion/5_ross_anger.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/5_ross_anger.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/5_ross_moved.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/5_ross_moved.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td rowspan="2">6</td>
+    <td colspan="2">What are you talking about?</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/case_study/emotion/6_angry.jpg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/6_angry.wav" type="audio/mpeg" /></audio>
+    </td>
+    <td>
+      <img src="./assets/case_study/emotion/6_question.jpeg" style="height:200px; width:auto;" /><br />
+      <audio controls=""><source src="./assets/case_study/emotion/6_question.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<h2 id="-ablation-study"><a href="#ablation-study"></a> Ablation Study</h2>
+
+<p>To verify the effectiveness of multi-modal contrastive learning, we conduct ablation experiments. We present partial synthesized audios as follows.</p>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Image &amp; Text</th>
+    <th>Proposed</th>
+    <th>Proposed w/o Text</th>
+    <th>Baseline</th>
+  </tr>
+  
+  <tr>
+    <td>1</td>
+    <td>
+      <img src="./assets/ablation/gt_audio_7.jpg" style="height:200px; width:auto;" />
+      <br />
+      你这个问题问的的确好笑
+    </td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_7_Pro.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_7_wo.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_7_B.wav" type="audio/mpeg" /></audio></td>
+  </tr>
+  
+  <tr>
+    <td>2</td>
+    <td>
+      <img src="./assets/ablation/gt_audio_92.jpg" style="height:200px; width:auto;" />
+      <br />
+      弄的我名声不佳我简直要气死了呀<span style="color: lightgray;"><small>*(trans: It's given me a bad reputation, and I'm really pissed off)*</small></span>
+    </td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_92_Pro.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_92_wo.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_92_B.wav" type="audio/mpeg" /></audio></td>
+  </tr>
+  
+  <tr>
+    <td>3</td>
+    <td>
+      <img src="./assets/ablation/gt_audio_106.jpg" style="height:200px; width:auto;" />
+      <br />
+      有的,最后一朵花的幽灵依然存在着!<span style="color: lightgray;"><small>*(trans: Yes, the ghost of the last flower still exists!)*</small></span>
+    </td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_106_Pro.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_106_wo.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_106_B.wav" type="audio/mpeg" /></audio></td>
+  </tr>
+  
+  <tr>
+    <td>4</td>
+    <td>
+      <img src="./assets/ablation/gt_audio_570.jpg" style="height:200px; width:auto;" />
+      <br />
+      A man stood behind blaine ,
+    </td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_570_Pro.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_570_wo.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_570_B.wav" type="audio/mpeg" /></audio></td>
+  </tr>
+  
+  <tr>
+    <td>5</td>
+    <td>
+      <img src="./assets/ablation/gt_audio_849.jpg" style="height:200px; width:auto;" />
+      <br />
+      From what you understand ,
+    </td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_849_Pro.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_849_wo.wav" type="audio/mpeg" /></audio></td>
+    <td><audio controls=""><source src="./assets/ablation/gen_audio_849_B.wav" type="audio/mpeg" /></audio></td>
+  </tr>
+</table>
+
+<h2 id="-compared-to-vanilla-tts"><a href="#Compared to Vanilla TTS"></a> Compared to Vanilla TTS</h2>
+
+<p>In this section, we compare the proposed HarmoniVox framework with the vanilla TTS model. We take CosyVoice as the representative for vanilla TTS model.</p>
+
+<p><img src="./assets/case_study/vanilla-TTS/case_vanilla.png" alt="" /></p>
+
+<p>From the comparison, we can observe that the HarmoniVox framework generates speech that is more closely aligned with the visual context. However, due to the limitations of the VITS backbone, the HarmoniVox framework may not generate inter-word pauses as effectively as the vanilla TTS model, which could impact the naturalness of the speech.</p>
+
+<p>The following are the samples of this comparison.</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>We were going to take the shortcut onto the brightside and as we were turning.</th>
+  </tr>
+
+  <tr>
+    <td>Vanilla-TTS(CosyVoice)</td>
+    <td>
+      <audio controls=""><source src="./assets/case_study/vanilla-TTS/EN-vanilla.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+
+  <tr>
+    <td>HarmoniVox</td>
+    <td>
+      <img src="./assets/case_study/vanilla-TTS/joy.png" style="height:200px; width:auto;" />
+      <br />
+      <audio controls=""><source src="./assets/case_study/vanilla-TTS/joy.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>HarmoniVox</td>
+    <td>
+      <img src="./assets/case_study/vanilla-TTS/neutral.png" style="height:200px; width:auto;" />
+      <br />
+      <audio controls=""><source src="./assets/case_study/vanilla-TTS/neutral.wav" type="audio/mpeg" /></audio>
+    </td>
+  </tr>
+</table>
+
+<h1 id="-appendix-content"><a href="#appendix"></a> Appendix Content</h1>
+
+<h2 id="-appendix-a-intra-domain-testset"><a href="#appendix-1"></a> Appendix A: Intra-domain Testset</h2>
+<p><img src="./assets/dataset_vis/testset-visualization.png" alt="" /></p>
+
+<h2 id="-appendix-b-out-of-domain-testset"><a href="#appendix-2"></a> Appendix B: Out-of-domain Testset</h2>
+<p>The out-of-domain testset are collected from the Internet, and the emotion, age distribution of the out-of-domain testset are more balanced than the intra-domain testset.</p>
+
+<p><img src="./assets/dataset_vis/out-of-domain-visualization.png" alt="" /></p>
+
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/harmonivox/harmonivox">harmonivox</a> is maintained by <a href="https://github.com/harmonivox">harmonivox</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const sidebarNav = document.getElementById('sidebar-nav');
+      const mainContent = document.querySelector('.main-content');
+      const headings = mainContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      
+      let currentLevel = 1;
+      let currentList = sidebarNav;
+      const listStack = [sidebarNav];
+    
+      headings.forEach(heading => {
+        const level = parseInt(heading.tagName.substring(1));
+        const id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+        heading.id = id;
+    
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${id}`;
+        a.textContent = heading.textContent;
+    
+        li.appendChild(a);
+    
+        if (level > currentLevel) {
+          const newList = document.createElement('ul');
+          currentList.lastElementChild.appendChild(newList);
+          listStack.push(newList);
+          currentList = newList;
+        } else if (level < currentLevel) {
+          while (level < currentLevel) {
+            listStack.pop();
+            currentList = listStack[listStack.length - 1];
+            currentLevel--;
+          }
+        }
+    
+        currentList.appendChild(li);
+        currentLevel = level;
+      });
+    });
+    </script>
+    
+      
+</html>
